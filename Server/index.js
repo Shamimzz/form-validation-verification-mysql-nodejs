@@ -10,7 +10,10 @@ require('dotenv').config()
 app.use(cors());
 // ata na dile server a undefined dekhabe, data asbe na. 
 app.use(express.json());
-app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(express.static("."));
+
 
 
 var Db = mysql.createPool({
@@ -22,21 +25,34 @@ var Db = mysql.createPool({
 
 
 
+
+app.get('/', async(req, res)=>{
+ res.sendFile(__dirname+'/register.html');
+});
+ 
+
 // Insert all data from Client........   
-app.post("/crud/insert", async(req, res)=>{
-  const {name,gender,birthday,department,batch,university,email,phone,password,confirmPass} = req.body;
-  // console.log(name, director);
+app.post('/', async(req, res)=>{
+  // const {name,gender,birthday,department,batch,university,email,phone,password,confirmPass} = req.body;
+
+  console.log("hitting post body", req.body);
+
+  const name = req.body.name;
+  const gender = req.body.gender;
+  const birthday = req.body.birthday;
+  const department = req.body.department;
+  const batch = req.body.batch;
 
   const SQLQuery =
-   "INSERT INTO student_info (name, director, date, price) VALUES = ?";
+   "INSERT INTO student_info(name, gender, birthday, department, batch) VALUES =(?,?,?,?,?)";
 
-   const value = [
-     [name,gender,birthday,department,batch,university,email,phone,password,confirmPass]
-   ]
+  //  var values = [
+  //    [name, gender, birthday, department, batch, university, email, phone, password, confirmPass]
+  //  ];
 
-  Db.query(SQLQuery, [value], (err, result)=>{
+  Db.query(SQLQuery, [name, gender, birthday, department, batch], (err, result)=>{
     if(err){
-      console.log("Wrong")
+      console.log("Wrong pushing")
     }else{
       console.log(result)
     }
@@ -44,12 +60,6 @@ app.post("/crud/insert", async(req, res)=>{
 
 })
 
-
-
-
-app.get('/', async(req, res)=>{
-   res.send(__dirname+'/register.html');
-})
 
 
 

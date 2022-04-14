@@ -65,9 +65,15 @@ input[type="date" i] {
   border-bottom: 2px solid grey;
 }
 
-#submit {
+.submit {
   margin-top: 20px;
   padding: 10px;
+  border: 2px solid #fff;
+}
+
+.submit:hover {
+  background-color: #ec598fb0;
+  color: #fff;
 }
 
 option {

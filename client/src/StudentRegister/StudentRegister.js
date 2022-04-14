@@ -1,42 +1,62 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
-    <link rel="stylesheet" href="style.css" />
-  </head>
+import React from 'react';
+import { useForm } from "react-hook-form";
+import './StudentRegister.css';
 
-  <body>
-    <h1>Student Information</h1>
+
+const StudentRegister = () => {
+
+
+    const { register, handleSubmit } = useForm();
+    const onSubmit = data => {
+        console.log(data)
+    };
+
+
+    const onChange = () => {
+        const password = document.querySelector("input[name=password]");
+        const confirmPass = document.querySelector("input[name=confirmPass]");
+        if (confirmPass.value === password.value) {
+          if (!password.value.match(/^.\w{5,}$/)) {
+            alert("Invalid Password");
+            password.focus();
+            return false;
+          } else {
+            confirmPass.setCustomValidity("");
+          }
+        }
+        if (!confirmPass.value == password.value) {
+          alert("Password must be the same");
+          confirmPass.focus();
+          return false;
+        }
+      }
+
+    return (
+        <div>
+             <h1>Student Information</h1>
     <div class="Container">
-      <form
-        name="registerForm"
-        type="submit"
-        onSubmit="validate(this)"
-        value="SUBMIT"
-        method="POST"
-      >
-        <label for="lastName">Full Name *</label>
-        <input type="text" name="Name" placeholder="Mr Alex" required />
+      <form onSubmit={handleSubmit(onSubmit)}
+       >
+      <label for="lastName">Full Name *</label>
+        {/* <input type="text" name="name" placeholder="Mr Alex" required /> */}
+        <input placeholder="Mr Alex" {...register("name")} />
         <label for="country" id="department">Gender</label>
-        <select name="gender" required="required">
+        <select {...register("gender")}>
           <option value="">Gender</option>
           <option value="male">Male</option>
           <option value="female">Female</option>
           <option value="other">other</option>
         </select>
         <label id="date" for="start">Date Of Birth</label>
-        <input type="date" name="Date" required />
+        <input type="date" {...register("date", { required: true })} />
         <label for="country" id="department">Department & Batch</label>
-        <select name="Department" required="required">
+        <select name="department" {...register("department", { required: true })}>
           <option value="" selected>Department</option>
-          <option>CSE</option>
-          <option>EEE</option>
-          <option>BBA</option>
+          <option value="CSE">CSE</option>
+          <option value="EEE">EEE</option>
+          <option value="BBA">BBA</option>
         </select>
-        <select name="Batch" required="required">
+        <select {...register("batch", { required: true })}>
           <option value="" selected>Batch</option>
           <option value="1st">1st</option>
           <option value="2nd">2nd</option>
@@ -55,39 +75,31 @@
         <label for="country" id="university">University Name</label>
         <select
           id="University"
-          required="required"
-          name="university"
+          {...register("university")}
           placeholder="University"
         >
           <option value="" selected>University</option>
-          <option>Pundra University Of Science</option>
+          <option value="Pundra University">Pundra University Of Science</option>
           & technology
-          <option>North South University</option>
-          <option>Independent University, Bangladesh</option>
-          <option>East West University</option>
-          <option>University of Asia Pacific</option>
+          <option value="North South University">North South University</option>
+          <option value="Independent University">Independent University, Bangladesh</option>
+          <option value="East West University">East West University</option>
+          <option value="University of Asia">University of Asia Pacific</option>
         </select>
         <label for="email">E-mail address *</label>
         <input
-          type="email"
-          name="email"
+          {...register("email", { required: true })}
           pattern="\w.*+\@+[a-z]+\.[a-z]{2,7}"
-          required
           placeholder="alexRoline@net.com"
-          oninput="this.setCustomValidity('')"
-          required
+        //   oninput="this.setCustomValidity('')"
         />
-        <label for="phoneNumber">Phone Number</label>
+        <label for="phoneNumber">Phone Number</label> 
         <input
-          type="text"
+          defaultValue="+880"
           id="phoneNumber"
-          name="phoneNumber"
-          maxlength="11"
-          pattern=".{9,}"
-          required
+          {...register("phoneNumber",{ required: true, maxLength: 11 })}
           title="9 characters length"
-          placeholder="+8801523587972"
-        />
+        />  
 
         <label
           >password :
@@ -96,7 +108,7 @@
             placeholder="Password"
             id="password"
             type="password"
-            onChange="onChange()"
+            onBlur={onChange}
             oninput="this.setCustomValidity('')"
             pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z])\w{5,}"
             title="Must have at least 5 characters, including UPPER/lowercase letters and number"
@@ -111,7 +123,7 @@
             placeholder="Confirm Password"
             name="confirmPass"
             id="confirmPass"
-            onChange="onChange()"
+            onBlur={onChange}
             pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z])\w{5,}"
             title="Must be the same password as above"
             required
@@ -119,30 +131,11 @@
           <span id="message"></span>
         </label>
 
-        <button id="submit" type="submit">Submit</button>
+        <input className='submit' type="submit" />
       </form>
     </div>
+        </div>
+    );
+};
 
-    <script>
-      //password validate.......................
-      function onChange(from) {
-        const password = document.querySelector("input[name=password]");
-        const confirmPass = document.querySelector("input[name=confirmPass]");
-        if (confirmPass.value === password.value) {
-          if (!form.pword.value.match(/^.\w{5,}$/)) {
-            alert("Invalid Password");
-            form.pword.focus();
-            return false;
-          } else {
-            confirmPass.setCustomValidity("");
-          }
-        }
-        if (!form.pwordConfirm.value == form.pword.value) {
-          alert("Password must be the same");
-          form.pwordConfirm.focus();
-          return false;
-        }
-      }
-    </script>
-  </body>
-</html>
+export default StudentRegister;
