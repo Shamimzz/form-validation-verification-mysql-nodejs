@@ -1,0 +1,151 @@
+body {
+  color: grey;
+  font-family: "Lato";
+  text-align: center;
+  /* background: #0e101c; */
+  background: #081229;
+  margin: 30px;
+}
+
+h1 {
+  color: white;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.Container {
+  border: 1px solid #fff;
+  margin: auto;
+  text-align: left;
+  /* background: #081229; */
+  width: 40%;
+  border-radius: 20px;
+  display: flex;
+  justify-content: center;
+  padding: 20px;
+}
+
+label {
+  color: #66cc99;
+  text-transform: uppercase;
+}
+
+input[type="date" i] {
+  color-scheme: dark;
+}
+
+.input[type="date"] {
+  color-scheme: dark;
+}
+
+#date,
+#department,
+#university {
+  display: block;
+  margin-top: 20px;
+}
+
+#Genger,
+#University {
+  display: block;
+  padding: 10px 150px 10px 5px;
+  width: 100%;
+  border: 2px solid white;
+  border-bottom: 2px solid grey;
+  margin: 10px 0 30px;
+}
+
+#Department {
+  /* background: none; */
+  color: black;
+  width: 100%;
+  display: block;
+  padding: 10px 200px 10px 5px;
+  border: none;
+  border-bottom: 2px solid grey;
+}
+
+#submit {
+  margin-top: 20px;
+  padding: 10px;
+}
+
+option {
+  padding: 10px;
+}
+
+input {
+  color: #fff;
+  width: 100%;
+  background: transparent;
+  font-size: 14px;
+  display: block;
+  padding: 10px 0px 10px 5px;
+  margin: 10px 0 30px;
+  border: none;
+  border-bottom: 1px solid rgba(128, 128, 128, 0.5);
+}
+
+input:focus {
+  outline: none;
+  border-bottom: 2px solid #66cc99;
+}
+
+.radio-question input {
+  margin: 10px;
+  padding: 0;
+}
+
+.radio-input {
+  display: inline;
+}
+
+.button {
+  background: #66cc99;
+  border: 0;
+  padding: 15px 30px;
+  margin-top: 20px;
+  color: white;
+  text-transform: uppercase;
+  font-size: 13px;
+}
+
+.button:hover {
+  background: #5ec190;
+}
+
+.pass-alart {
+  display: grid;
+}
+
+@media only screen and (max-width: 668px) {
+  .Container {
+    width: 80%;
+  }
+}
+@media only screen and (max-width: 284px) {
+  h1 {
+    font-size: 15px !important;
+  }
+  .Container {
+    width: 90%;
+    border: none;
+  }
+  input {
+    width: 80%;
+    font-size: 14px;
+    padding: 5px 0px 5px 2px;
+    margin: 10px 0 20px;
+  }
+  #Genger,
+  #University {
+    padding: 10px 150px 10px 5px;
+    width: 80%;
+    margin: 10px 0 30px;
+  }
+
+  #Department {
+    width: 80%;
+    padding: 10px 200px 10px 5px;
+  }
+}
