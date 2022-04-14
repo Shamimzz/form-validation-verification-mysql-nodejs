@@ -1,12 +1,12 @@
 const express = require('express');
 var mysql = require('mysql');
 const cors = require('cors');
-const bodyParser = require('body-parser')
+const bodyParser = require('body-parser');
 
 // initialize our express app
 const port = 5000;
 const app = express();
-require('dotenv').config()
+require('dotenv').config();
 app.use(cors());
 // ata na dile server a undefined dekhabe, data asbe na. 
 app.use(express.json());
@@ -30,34 +30,22 @@ var Db = mysql.createPool({
     
 
 
-// Insert all data from Client........   
+// Insert all data from Client.........   
 app.post('/insertInfo', async(req, res)=>{
-  // const {name,gender,birthday,department,batch,university,email,phone,password,confirmPass} = req.body;
-
-  console.log("hitting post body", req.body);
-
-  const name = req.body.name;
-  const gender = req.body.gender;
-  const birthday = req.body.birthday;
-  const department = req.body.department;
-  const batch = req.body.batch;
-
+  const {name,gender,date,department,batch,university,email,phone,password,confirmPass} = req.body;
+  console.log("hitting post body", name, gender, date);
   const SQLQuery =
-   "INSERT INTO student_info(name, gender, birthday, department, batch) VALUES =(?,?,?,?,?)";
-
-  //  var values = [
-  //    [name, gender, birthday, department, batch, university, email, phone, password, confirmPass]
-  //  ];
-
-  Db.query(SQLQuery, [name, gender, birthday, department, batch], (err, result)=>{
+   "INSERT INTO student_info (name, gender, date, department) VALUES =(?,?,?,?)";
+  //var values=[[name, gender, date, department, batch, university, email, phone, password, confirmPass]];
+  Db.query(SQLQuery, [name, gender, date, department], (err, result)=>{
     if(err){
       console.log("Wrong pushing")
     }else{
       console.log(result)
     }
   })
-
 })
+
 
 
 
