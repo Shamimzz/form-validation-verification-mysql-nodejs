@@ -4,7 +4,7 @@ import StudentRegister from './StudentRegister/StudentRegister';
 function App() {
   return (
     <div className="App">
-     <StudentRegister></StudentRegister>
+       <StudentRegister></StudentRegister>
     </div>
   );
 }

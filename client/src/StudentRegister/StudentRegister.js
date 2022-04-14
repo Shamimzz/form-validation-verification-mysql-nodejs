@@ -1,15 +1,24 @@
 import React from 'react';
 import { useForm } from "react-hook-form";
 import './StudentRegister.css';
-
+const axios = require('axios');
 
 const StudentRegister = () => {
 
 
     const { register, handleSubmit } = useForm();
     const onSubmit = data => {
-        console.log(data)
-    };
+        console.log(data);
+        axios.post('http://localhost:5000/insertInfo', data)
+        .then(res => {
+            console.log(res);
+           alert("Successfully Added!");
+        })
+        .catch(err => {console.log(err)});
+     };
+
+
+
 
 
     const onChange = () => {
@@ -35,8 +44,7 @@ const StudentRegister = () => {
         <div>
              <h1>Student Information</h1>
     <div class="Container">
-      <form onSubmit={handleSubmit(onSubmit)}
-       >
+      <form onSubmit={handleSubmit(onSubmit)}>
       <label for="lastName">Full Name *</label>
         {/* <input type="text" name="name" placeholder="Mr Alex" required /> */}
         <input placeholder="Mr Alex" {...register("name")} />

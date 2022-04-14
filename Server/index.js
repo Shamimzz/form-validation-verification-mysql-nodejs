@@ -12,7 +12,7 @@ app.use(cors());
 app.use(express.json());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
-app.use(express.static("."));
+// app.use(express.static("."));
 
 
 
@@ -24,15 +24,14 @@ var Db = mysql.createPool({
    });
 
 
+  //  app.get('/', async(req, res)=>{
+  //   res.sendFile(__dirname+'/register.html');
+  //  });
+    
 
-
-app.get('/', async(req, res)=>{
- res.sendFile(__dirname+'/register.html');
-});
- 
 
 // Insert all data from Client........   
-app.post('/', async(req, res)=>{
+app.post('/insertInfo', async(req, res)=>{
   // const {name,gender,birthday,department,batch,university,email,phone,password,confirmPass} = req.body;
 
   console.log("hitting post body", req.body);
