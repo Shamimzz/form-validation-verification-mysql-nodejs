@@ -4,7 +4,7 @@ const cors = require('cors');
 const bodyParser = require('body-parser');
 
 // initialize our express app
-const port = 5000;
+const port = 5001;
 const app = express();
 require('dotenv').config();
 app.use(cors());
@@ -29,20 +29,22 @@ var Db = mysql.createPool({
   //  });
     
 
+  // ,department,batch,university,email,phone,password,confirmPass
+
+
 
 // Insert all data from Client.........   
 app.post('/insertInfo', async(req, res)=>{
-  const {name,gender,date,department,batch,university,email,phone,password,confirmPass} = req.body;
-  console.log("hitting post body", name, gender, date);
+  const {name, gender, birthday, department, batch, university, email, phone, password, confirmPass} = req.body;
+  
   const SQLQuery =
-   "INSERT INTO student_info (name, gender, date, department) VALUES =(?,?,?,?)";
-  //var values=[[name, gender, date, department, batch, university, email, phone, password, confirmPass]];
-  Db.query(SQLQuery, [name, gender, date, department], (err, result)=>{
-    if(err){
-      console.log("Wrong pushing")
-    }else{
-      console.log(result)
-    }
+   "INSERT INTO student_info (name, gender, birthday, department, batch, university, email, phone, password, confirmPass) VALUES ?"
+
+  var values=[[name, gender, birthday, department, batch, university, email, phone, password, confirmPass]];
+
+  Db.query(SQLQuery, [values], (err, result) => {
+    if(err){console.log("Wrong pushing", err)}
+    else{ console.log(result)}
   })
 })
 

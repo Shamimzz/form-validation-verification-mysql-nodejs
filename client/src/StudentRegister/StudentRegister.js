@@ -9,10 +9,9 @@ const StudentRegister = () => {
     const { register, handleSubmit } = useForm();
     const onSubmit = data => {
         console.log(data);
-        axios.post('http://localhost:5000/insertInfo', data)
+        axios.post('http://localhost:5001/insertInfo', data)
         .then(res => {
             console.log(res);
-           alert("Successfully Added!");
         })
         .catch(err => {console.log(err)});
      };
@@ -56,8 +55,8 @@ const StudentRegister = () => {
           <option value="other">other</option>
         </select>
         <label id="date" for="start">Date Of Birth</label>
-        <input type="date" {...register("date", { required: true })} />
-        <label for="country" id="department">Department & Batch</label>
+        <input type="date" {...register("birthday", { required: true })}/>
+   <label for="country" id="department">Department & Batch</label>
         <select name="department" {...register("department", { required: true })}>
           <option value="" selected>Department</option>
           <option value="CSE">CSE</option>
@@ -105,14 +104,14 @@ const StudentRegister = () => {
         <input
           defaultValue="+880"
           id="phoneNumber"
-          {...register("phoneNumber",{ required: true, maxLength: 11 })}
+          {...register("phone",{ required: true, maxLength: 11 })}
           title="9 characters length"
         />  
 
         <label
           >password :
           <input
-            name="password"
+           {...register("password")}
             placeholder="Password"
             id="password"
             type="password"
@@ -129,7 +128,7 @@ const StudentRegister = () => {
           <input
             type="password"
             placeholder="Confirm Password"
-            name="confirmPass"
+            {...register("confirmPass")}
             id="confirmPass"
             onBlur={onChange}
             pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z])\w{5,}"
@@ -137,7 +136,7 @@ const StudentRegister = () => {
             required
           />
           <span id="message"></span>
-        </label>
+        </label> 
 
         <input className='submit' type="submit" />
       </form>
