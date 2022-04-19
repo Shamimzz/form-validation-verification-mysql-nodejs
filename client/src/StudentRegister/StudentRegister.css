@@ -5,6 +5,17 @@ body {
   background: #081229;
 }
 
+.register-Main {
+  background-image: url("../../img/wave1.svg"), url("../../img/waveUp.svg");
+  background-position: bottom, top;
+  background-repeat: no-repeat, no-repeat;
+}
+
+.title {
+  color: #fff;
+  font-size: 30px;
+}
+
 h1 {
   color: white;
   text-transform: uppercase;
@@ -20,12 +31,14 @@ h1 {
   display: flex;
   justify-content: center;
   padding: 20px;
+  background-color: rgba(29, 29, 29, 0.3);
 }
 
 label {
   font-size: 14px;
   color: #66cc99;
   text-transform: uppercase;
+  display: block;
 }
 
 input[type="date" i] {
@@ -77,6 +90,11 @@ option {
   padding: 10px;
 }
 
+/* #password,
+#confirmPass {
+  display: block;
+} */
+
 input {
   color: #fff;
   width: 100%;
@@ -121,9 +139,14 @@ input:focus {
   display: grid;
 }
 
+@media only screen and (max-width: 1200px) {
+  .Container {
+    width: 60%;
+  }
+}
 @media only screen and (max-width: 668px) {
   .Container {
-    width: 80%;
+    width: 90%;
   }
 }
 @media only screen and (max-width: 284px) {

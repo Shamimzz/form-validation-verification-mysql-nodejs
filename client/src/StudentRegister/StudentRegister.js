@@ -1,31 +1,18 @@
 import React from 'react';
 import { useForm } from "react-hook-form";
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import './StudentRegister.css';
 const axios = require('axios');
 
 const StudentRegister = () => {
   
     const navigate = useNavigate();
-    const { register, handleSubmit } = useForm();
+    const { register, handleSubmit } = useForm({ mode: "onBlur" });
     const onSubmit = data => {
-      console.log(data);
         axios.post('http://localhost:5001/insertInfo', data)
+        alert('Succesfully Registered!');
         navigate('/login');
-        // window.location.href = "/login"; 
-        // .then(res => {
-          //  window.location.href = "/login"; 
-            // window.location.replace = '/login';
-            // console.log("From ui response...", res.data);
-            // if(res){
-              // alert('wow success')
-              // console.log("hiting...........")
-              // navigate('/login');
-            // }
-        // })
-        // .catch(err => {console.log(err)});
      };
-
 
 
     const onChange = () => {
@@ -48,12 +35,12 @@ const StudentRegister = () => {
       }
 
     return (
-        <div>
-             <h1>Student Information</h1>
+      <div class='register-Main p-8'>
     <div class="Container">
-      <form onSubmit={handleSubmit(onSubmit)}>
+    <form onSubmit={handleSubmit(onSubmit)}>
+      <h2 class='title'>Student Information</h2>
       <label for="lastName">Full Name *</label>
-        <input placeholder="Mr Alex" {...register("name")} />
+        <input placeholder="Mr Alex" {...register("name", { required: "Name is required" })}/>
         <label for="country" id="department">Gender</label>
         <select {...register("gender")}>
           <option value="">Gender</option>
@@ -63,7 +50,7 @@ const StudentRegister = () => {
         </select>
         <label id="date" for="start">Date Of Birth</label>
         <input type="date" {...register("birthday", { required: true })}/>
-   <label for="country" id="department">Department & Batch</label>
+        <label for="country" id="department">Department & Batch</label>
         <select name="department" {...register("department", { required: true })}>
           <option value="" selected>Department</option>
           <option value="CSE">CSE</option>
@@ -118,15 +105,14 @@ const StudentRegister = () => {
         <label
           >password :
           <input
-           {...register("password")}
+           {...register("password", {required: "Password is required"})}
             placeholder="Password"
             id="password"
             type="password"
             onBlur={onChange}
             oninput="this.setCustomValidity('')"
-            pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z])\w{5,}"
-            title="Must have at least 5 characters, including UPPER/lowercase letters and number"
-            required
+            pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z])\w{6,}"
+            title="Must have at least 6 characters, including UPPER/lowercase letters and number"   
           />
         </label>
         <br />
@@ -143,10 +129,12 @@ const StudentRegister = () => {
             required
           />
           <span id="message"></span>
-        </label> 
+        </label> <br/>
         
         {/* <Link to="/login" className='submit' type='submit'>Submit</Link> */}
-        <input className='submit' type="submit" />
+        <button type="submit" class="px-12 m-4 py-1 text-sm text-purple-600 font-semibold rounded-full border border-purple-200 hover:text-white hover:bg-purple-600 hover:border-transparent focus:outline-none focus:ring-2 focus:ring-purple-600 focus:ring-offset-2">Register</button>
+        <Link to="/login" type="submit" class="px-12 m-4 py-1 text-sm text-purple-600 font-semibold rounded-full border border-purple-200 hover:text-white hover:bg-purple-600 hover:border-transparent focus:outline-none focus:ring-2 focus:ring-purple-600 focus:ring-offset-2">Sign In</Link>
+        {/* <input className='submit' type="submit" /> */}
       </form>
     </div>
         </div>
