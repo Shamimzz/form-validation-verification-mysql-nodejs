@@ -1,22 +1,30 @@
 import React from 'react';
 import { useForm } from "react-hook-form";
+import { useNavigate } from 'react-router-dom';
 import './StudentRegister.css';
 const axios = require('axios');
 
 const StudentRegister = () => {
-
-
+  
+    const navigate = useNavigate();
     const { register, handleSubmit } = useForm();
     const onSubmit = data => {
-        console.log(data);
+      console.log(data);
         axios.post('http://localhost:5001/insertInfo', data)
-        .then(res => {
-            console.log(res);
-        })
-        .catch(err => {console.log(err)});
+        navigate('/login');
+        // window.location.href = "/login"; 
+        // .then(res => {
+          //  window.location.href = "/login"; 
+            // window.location.replace = '/login';
+            // console.log("From ui response...", res.data);
+            // if(res){
+              // alert('wow success')
+              // console.log("hiting...........")
+              // navigate('/login');
+            // }
+        // })
+        // .catch(err => {console.log(err)});
      };
-
-
 
 
 
@@ -45,7 +53,6 @@ const StudentRegister = () => {
     <div class="Container">
       <form onSubmit={handleSubmit(onSubmit)}>
       <label for="lastName">Full Name *</label>
-        {/* <input type="text" name="name" placeholder="Mr Alex" required /> */}
         <input placeholder="Mr Alex" {...register("name")} />
         <label for="country" id="department">Gender</label>
         <select {...register("gender")}>
@@ -104,7 +111,7 @@ const StudentRegister = () => {
         <input
           defaultValue="+880"
           id="phoneNumber"
-          {...register("phone",{ required: true, maxLength: 11 })}
+          {...register("phone",{ required: true })}
           title="9 characters length"
         />  
 
@@ -137,7 +144,8 @@ const StudentRegister = () => {
           />
           <span id="message"></span>
         </label> 
-
+        
+        {/* <Link to="/login" className='submit' type='submit'>Submit</Link> */}
         <input className='submit' type="submit" />
       </form>
     </div>

@@ -29,9 +29,6 @@ var Db = mysql.createPool({
   //  });
     
 
-  // ,department,batch,university,email,phone,password,confirmPass
-
-
 
 // Insert all data from Client.........   
 app.post('/insertInfo', async(req, res)=>{
@@ -44,7 +41,7 @@ app.post('/insertInfo', async(req, res)=>{
 
   Db.query(SQLQuery, [values], (err, result) => {
     if(err){console.log("Wrong pushing", err)}
-    else{ console.log(result)}
+    else{ console.log('hey post', result)}
   })
 })
 

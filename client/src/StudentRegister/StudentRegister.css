@@ -2,9 +2,7 @@ body {
   color: grey;
   font-family: "Lato";
   text-align: center;
-  /* background: #0e101c; */
   background: #081229;
-  margin: 30px;
 }
 
 h1 {
@@ -17,8 +15,7 @@ h1 {
   border: 1px solid #fff;
   margin: auto;
   text-align: left;
-  /* background: #081229; */
-  width: 40%;
+  width: 35%;
   border-radius: 20px;
   display: flex;
   justify-content: center;
@@ -26,6 +23,7 @@ h1 {
 }
 
 label {
+  font-size: 14px;
   color: #66cc99;
   text-transform: uppercase;
 }
@@ -52,11 +50,10 @@ input[type="date" i] {
   width: 100%;
   border: 2px solid white;
   border-bottom: 2px solid grey;
-  margin: 10px 0 30px;
+  margin: 10px 0 20px;
 }
 
 #Department {
-  /* background: none; */
   color: black;
   width: 100%;
   display: block;
@@ -66,7 +63,7 @@ input[type="date" i] {
 }
 
 .submit {
-  margin-top: 20px;
+  margin-top: 10px;
   padding: 10px;
   border: 2px solid #fff;
 }
@@ -87,7 +84,7 @@ input {
   font-size: 14px;
   display: block;
   padding: 10px 0px 10px 5px;
-  margin: 10px 0 30px;
+  margin: 10px 0 20px;
   border: none;
   border-bottom: 1px solid rgba(128, 128, 128, 0.5);
 }
