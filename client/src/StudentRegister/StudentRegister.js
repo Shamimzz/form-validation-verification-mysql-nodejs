@@ -8,6 +8,7 @@ const StudentRegister = () => {
   
     const navigate = useNavigate();
     const { register, handleSubmit } = useForm({ mode: "onBlur" });
+    
     const onSubmit = data => {
         axios.post('http://localhost:5001/insertInfo', data)
         alert('Succesfully Registered!');
@@ -131,11 +132,14 @@ const StudentRegister = () => {
           <span id="message"></span>
         </label> <br/>
         
-        {/* <Link to="/login" className='submit' type='submit'>Submit</Link> */}
-        <button type="submit" class="px-12 m-4 py-1 text-sm text-purple-600 font-semibold rounded-full border border-purple-200 hover:text-white hover:bg-purple-600 hover:border-transparent focus:outline-none focus:ring-2 focus:ring-purple-600 focus:ring-offset-2">Register</button>
-        <Link to="/login" type="submit" class="px-12 m-4 py-1 text-sm text-purple-600 font-semibold rounded-full border border-purple-200 hover:text-white hover:bg-purple-600 hover:border-transparent focus:outline-none focus:ring-2 focus:ring-purple-600 focus:ring-offset-2">Sign In</Link>
-        {/* <input className='submit' type="submit" /> */}
+       <div class="">
+       <button type="submit" class="px-12 m-2 py-1 text-sm text-purple-600 font-semibold rounded-full border border-purple-200 hover:text-white hover:bg-purple-600 hover:border-transparent focus:outline-none focus:ring-2 focus:ring-purple-600 focus:ring-offset-2">Register</button>
+        <Link to="/login" type="submit" class="px-12 m-2 py-1 text-sm text-purple-600 font-semibold rounded-full border border-purple-200 hover:text-white hover:bg-purple-600 hover:border-transparent focus:outline-none focus:ring-2 focus:ring-purple-600 focus:ring-offset-2">Sign In</Link>
+       </div>
+
       </form>
+
+
     </div>
         </div>
     );

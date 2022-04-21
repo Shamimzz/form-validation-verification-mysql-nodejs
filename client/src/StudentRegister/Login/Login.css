@@ -1,9 +1,8 @@
 .login-Main {
-  height: 100vh;
-  background-image: url("../../../img/wave1.svg"),
-    url("../../../img/waveUp.svg");
-  background-position: bottom, top;
-  background-repeat: no-repeat, no-repeat;
+  background-image: url("../../../img/waveUp.svg");
+  /* url("../../../img/waveUp.svg"); wave1 bottom, no-repeat,*/
+  background-position: top;
+  background-repeat: no-repeat;
 }
 
 .margin {

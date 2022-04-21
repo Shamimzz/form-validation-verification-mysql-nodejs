@@ -4,14 +4,15 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import "./App.css";
 import Login from "./StudentRegister/Login/Login";
 import StudentRegister from "./StudentRegister/StudentRegister";
+import Success from './StudentRegister/Success/Success';
 function App() {
   return (
     <div className="App">
       <BrowserRouter>
        <Routes>
-          <Route path="/" element={<StudentRegister />} />
-          {/* <Route path="/reg" element={<Reg />} /> */}
-          <Route path="/login" element={<Login />} />
+          <Route path="/" element={<StudentRegister />}/>
+          <Route path="/login" element={<Login />}/>
+          <Route path="/success" element={<Success />}/>
        </Routes>
       </BrowserRouter>
     </div>
