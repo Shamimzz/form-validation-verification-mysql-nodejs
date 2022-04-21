@@ -3,20 +3,14 @@ import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 
 const Success = () => {
-
-//    const [session, setSession] = useState('');
-   
-   useEffect(() =>{
+   useEffect(() => {
        axios.get('http://localhost:5001/success', )
-      //fetch('')
-       .then(response => response.json())
-	   .then(data => console.log(data))
-   	   .catch(err => console.error(err));
-   }, [])
+        .then(response => response.json())
+	    .then(data => console.log(data))
+   	    .catch(err => console.error(err));
+    }, [])
 
-
-
-    return (
+    return(
         <div class="w-75 m-auto">
             <div class="mt-12">
              <h1>Login Succesfully!</h1>

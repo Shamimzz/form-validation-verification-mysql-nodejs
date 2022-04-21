@@ -2,7 +2,7 @@ const express = require('express');
 var mysql = require('mysql');
 const cors = require('cors');
 const bodyParser = require('body-parser');
-const session = require('express-session'); //cookies
+// const session = require('express-session'); 
 
 // initialize our express app
 const port = 5001;
@@ -14,11 +14,11 @@ app.use(express.json());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 // app.use(express.static("."));
-app.use(session({
-	secret: 'secret',
-	resave: true,
-	saveUninitialized: true
-}));
+// app.use(session({
+// 	secret: 'secret',
+// 	resave: true,
+// 	saveUninitialized: true
+// }));
 
 
 var Db = mysql.createPool({
@@ -37,60 +37,36 @@ var Db = mysql.createPool({
     
 
 
-// Insert all data from Client.........   
+// Insert all data from Client.......
 app.post('/insertInfo', async(req, res)=>{
   const {name, gender, birthday, department, batch, university, email, phone, password, confirmPass} = req.body;
-  
-//   Db.query('SELECT email FROM student_info WHERE email = ?', [email], async(err, result) => {
-//      if(err) throw err;
-// 	 if(result[0]) return res.json({ status: "error", error: "email already registered"})
-// 	 else{
-// 		const SQLQuery =
-// 		"INSERT INTO student_info (name, gender, birthday, department, batch, university, email, phone, password, confirmPass) VALUES ?"
-	 
-// 	   var values=[[name, gender, birthday, department, batch, university, email, phone, password, confirmPass]];
-	 
-// 	   Db.query(SQLQuery, [values], (err, result) => {
-// 		 if(err){console.log("Wrong pushing", err)}
-// 		 else{ console.log('hey post', result)}
-// 	   })
-// 	 }  
-//   })
+  const SQLQuery = "INSERT INTO student_info (name, gender, birthday, department, batch, university, email, phone, password, confirmPass) VALUES ?"
 
-const SQLQuery =
-"INSERT INTO student_info (name, gender, birthday, department, batch, university, email, phone, password, confirmPass) VALUES ?"
+   var values=[[name, gender, birthday, department, batch, university, email, phone, password, confirmPass]];
 
-var values=[[name, gender, birthday, department, batch, university, email, phone, password, confirmPass]];
-
-Db.query(SQLQuery, [values], (err, result) => {
- if(err){console.log("Wrong pushing", err)}
- else{ console.log('hey post', result)}
-})
+   Db.query(SQLQuery, [values], (err, result) => {
+     if(err){console.log("Wrong pushing", err)}
+     else{ console.log('hey post', result)}
+   })
 
 })
 
 
-// Password verification.........   
+// Password verification.......  
 app.post('/login', async(req, res) => {
-	// console.log('getting body', req.body);
 	// Capture the input fields
 	let email = req.body.email;
 	let password = req.body.password;
-    // console.log('getting pass bakend',  email, password);
 	// Ensure the input fields exists and are not empty
 	if (email && password) {
 		// Execute SQL query that'll select the account from the database based on the specified username and password
 		Db.query('SELECT * FROM student_info WHERE email = ? AND password = ?', [email, password], function(err, result, fields) {
 			// console.log(password)
-			// if(!results.length || !await compare(password, results.password))
 			// If there is an issue with the query, output the error
 			if(err){res.send({err: err})};
 			// If the account exists
 			if (result.length > 0) {
 				res.send(result);
-				// Authenticate the user
-				// Redirect to home page
-				// res.redirect('/success');
 			} else {
 				res.send({message: 'Incorrect email or Password!'});
 			}			
@@ -100,13 +76,10 @@ app.post('/login', async(req, res) => {
 		res.send('Please enter Username and Password!');
 		res.end();
 	}
-
 });
 
 
-
-
-// http://localhost:3000/home (Home)
+// Success route showing after login.....
 app.get('/success', function(req, res) {
 	// If the user is loggedin
 	if (req.session.loggedin) {
