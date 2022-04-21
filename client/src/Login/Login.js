@@ -6,7 +6,7 @@ import * as Yup from 'yup';
 import './Login.css';
 
 const Login = () => {
-     const navigate = useNavigate();
+    const navigate = useNavigate();
     const [message, setMessage] = useState('');
 
     const formSchema = Yup.object().shape({

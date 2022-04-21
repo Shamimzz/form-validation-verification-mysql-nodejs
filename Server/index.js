@@ -2,7 +2,6 @@ const express = require('express');
 var mysql = require('mysql');
 const cors = require('cors');
 const bodyParser = require('body-parser');
-// const session = require('express-session'); 
 
 // initialize our express app
 const port = 5001;
@@ -13,12 +12,6 @@ app.use(cors());
 app.use(express.json());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
-// app.use(express.static("."));
-// app.use(session({
-// 	secret: 'secret',
-// 	resave: true,
-// 	saveUninitialized: true
-// }));
 
 
 var Db = mysql.createPool({
@@ -28,12 +21,13 @@ var Db = mysql.createPool({
     database: "demo_1st"
    });
 
-  //  const path = require('path');
-  //  app.use(express.static(path.join(__dirname, 'static')));
-  //  // Render login template
-  //  app.get('/', function(request, response) {
-  //   response.sendFile(path.join(__dirname + '/login.html'));
-  //  });
+
+//    const path = require('path');
+//    app.use(express.static(path.join(__dirname, 'static')));
+//    // Render login template
+//    app.get('/', function(request, response) {
+//     response.sendFile(path.join(__dirname + '/login.html'));
+//    });
     
 
 
@@ -55,12 +49,13 @@ app.post('/insertInfo', async(req, res)=>{
 // Password verification.......  
 app.post('/login', async(req, res) => {
 	// Capture the input fields
-	let email = req.body.email;
-	let password = req.body.password;
-	// Ensure the input fields exists and are not empty
+	// let email = req.body.email;
+	// let password = req.body.password;
+	const {email, password} = req.body;
 	if (email && password) {
-		// Execute SQL query that'll select the account from the database based on the specified username and password
-		Db.query('SELECT * FROM student_info WHERE email = ? AND password = ?', [email, password], function(err, result, fields) {
+		// Ensure the input fields exists and are not empty.
+		// Execute SQL query that'll select the account from the database based on the specified username and password.
+		Db.query('SELECT * FROM student_info WHERE email = ? AND password = ?', [email, password], function(err, result, fields){
 			// console.log(password)
 			// If there is an issue with the query, output the error
 			if(err){res.send({err: err})};
@@ -80,26 +75,29 @@ app.post('/login', async(req, res) => {
 
 
 // Success route showing after login.....
-app.get('/success', function(req, res) {
-	// If the user is loggedin
-	if (req.session.loggedin) {
-		// Output username
-		res.send('Welcome back, ' + req.session.username + '!');
-	} else {
-		// Not logged in
-		res.send('Please login to view this page!');
-	}
-	res.end();
-});
+// app.get('/success', function(req, res) {
+// 	console.log('Success', req.body);
+// 	// If the user is loggedin
+// 	// if (req.session.loggedin) {
+// 	// 	// Output username
+// 	// 	res.send('Welcome back, ' + req.session.username + '!');
+// 	// } else {
+// 	// 	// Not logged in
+// 	// 	res.send('Please login to view this page!');
+// 	// }
+// 	// res.end();
+// });
 
 
 
 
 // Database Listing......
 app.get("/", (req, res) => {
+  console.log('Local database Working...')	
   res.send("Local database Working....");
 });
 
-app.listen(port, ()=>{
-  console.log("Node Server running on", port)
+app.listen(port, ()=>{ 
+	console.log("Node Server running on", port) 
 })
+

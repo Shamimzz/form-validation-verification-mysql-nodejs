@@ -5,39 +5,41 @@ import './StudentRegister.css';
 const axios = require('axios');
 
 const StudentRegister = () => {
-  
     const navigate = useNavigate();
+    
     const { register, handleSubmit } = useForm({ mode: "onBlur" });
     
     const onSubmit = data => {
         axios.post('http://localhost:5001/insertInfo', data)
+        
         alert('Succesfully Registered!');
         navigate('/login');
      };
 
 
-    const onChange = () => {
-        const password = document.querySelector("input[name=password]");
-        const confirmPass = document.querySelector("input[name=confirmPass]");
-        if (confirmPass.value === password.value) {
-          if (!password.value.match(/^.\w{5,}$/)) {
-            alert("Invalid Password");
-            password.focus();
-            return false;
-          } else {
-            confirmPass.setCustomValidity("");
-          }
-        }
-        if (!confirmPass.value == password.value) {
-          alert("Password must be the same");
-          confirmPass.focus();
-          return false;
-        }
-      }
+    // const onChange = () => {
+    //     const password = document.querySelector("input[name=password]");
+    //     const confirmPass = document.querySelector("input[name=confirmPass]");
+    //     if (confirmPass.value === password.value) {
+    //       if (!password.value.match(/^.\w{5,}$/)) {
+    //         alert("Invalid Password");
+    //         password.focus();
+    //         return false;
+    //       } else {
+    //         confirmPass.setCustomValidity("");
+    //       }
+    //     }
+    //     if (!confirmPass.value == password.value) {
+    //       alert("Password must be the same");
+    //       confirmPass.focus();
+    //       return false;
+    //     }
+    //   }
 
     return (
-      <div class='register-Main p-8'>
+  <div class='register-Main p-8'>
     <div class="Container">
+
     <form onSubmit={handleSubmit(onSubmit)}>
       <h2 class='title'>Student Information</h2>
       <label for="lastName">Full Name *</label>
@@ -110,7 +112,7 @@ const StudentRegister = () => {
             placeholder="Password"
             id="password"
             type="password"
-            onBlur={onChange}
+            // onBlur={onChange}
             oninput="this.setCustomValidity('')"
             pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z])\w{6,}"
             title="Must have at least 6 characters, including UPPER/lowercase letters and number"   
@@ -124,7 +126,7 @@ const StudentRegister = () => {
             placeholder="Confirm Password"
             {...register("confirmPass")}
             id="confirmPass"
-            onBlur={onChange}
+            // onBlur={onChange}
             pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z])\w{5,}"
             title="Must be the same password as above"
             required
@@ -134,14 +136,13 @@ const StudentRegister = () => {
         
        <div class="">
        <button type="submit" class="px-12 m-2 py-1 text-sm text-purple-600 font-semibold rounded-full border border-purple-200 hover:text-white hover:bg-purple-600 hover:border-transparent focus:outline-none focus:ring-2 focus:ring-purple-600 focus:ring-offset-2">Register</button>
+
         <Link to="/login" type="submit" class="px-12 m-2 py-1 text-sm no-underline text-purple-600 font-semibold rounded-full border border-purple-200 hover:text-white hover:bg-purple-600 hover:border-transparent focus:outline-none focus:ring-2 focus:ring-purple-600 focus:ring-offset-2">Sign In</Link>
        </div>
-
       </form>
 
-
     </div>
-        </div>
+   </div>
     );
 };
 
